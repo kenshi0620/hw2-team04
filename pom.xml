@@ -55,4 +55,8 @@
   		<version>1.0.1-SNAPSHOT</version>
   	</dependency>
   </dependencies>
+  <scm>
+  	<connection>scm:git:git@github.com:laundry/hw2-team04.git</connection>
+  	<developerConnection>scm:git:git@github.com:laundry/hw2-team04.git</developerConnection>
+  </scm>
 </project>
