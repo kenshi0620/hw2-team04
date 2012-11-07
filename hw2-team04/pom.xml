@@ -62,6 +62,16 @@
 			<artifactId>helloqa</artifactId>
 			<version>1.0.1-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>com.aliasi</groupId>
+			<artifactId>lingpipe</artifactId>
+			<version>4.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>edu.stanford.nlp</groupId>
+			<artifactId>stanford-corenlp</artifactId>
+			<version>1.3.3</version>
+		</dependency>
 	</dependencies>
 	<scm>
 		<connection>scm:git:git@github.com:laundry/hw2-team04.git</connection>
