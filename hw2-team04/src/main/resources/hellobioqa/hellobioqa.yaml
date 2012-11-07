@@ -16,6 +16,7 @@ pipeline:
     options: |
       - inherit: helloqa.keyterm.simple
       - inherit: hellobioqa.team04.keyterm.AfandriaKeytermExtractor
+      - inherit: hellobioqa.team04.keyterm.AustinMaKeytermExtractor
       - inherit: hellobioqa.team04.keyterm.Byang1KeytermExtrator
       - inherit: hellobioqa.team04.keyterm.LingpipeConfidenceChunkerKeytermExtractor
 
