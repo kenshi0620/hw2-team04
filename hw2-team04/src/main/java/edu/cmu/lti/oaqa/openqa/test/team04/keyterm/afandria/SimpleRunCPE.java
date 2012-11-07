@@ -1,4 +1,4 @@
-package edu.cmu.lti.oaqa.openqa.test.team04.ner_afandria;
+package edu.cmu.lti.oaqa.openqa.test.team04.keyterm.afandria;
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
