@@ -1,6 +1,6 @@
 configuration: 
   name: hellobioqa
-  author: oaqa
+  author: team04
   
 persistence-provider:
   inherit: helloqa.db.local-persistence-provider
@@ -16,6 +16,7 @@ pipeline:
     options: |
       - inherit: helloqa.keyterm.simple
       - inherit: hellobioqa.team04.keyterm.AfandriaKeytermExtractor
+      - inherit: hellobioqa.team04.keyterm.Byang1KeytermExtrator
 
   - inherit: jdbc.sqlite.cse.phase 
     name: retrieval-strategist
