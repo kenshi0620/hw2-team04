@@ -1,4 +1,4 @@
-package weijia.zhang;
+package edu.cmu.lti.oaqa.openqa.test.team04.keyterm;
 
 import java.io.BufferedReader;
 import java.io.File;
