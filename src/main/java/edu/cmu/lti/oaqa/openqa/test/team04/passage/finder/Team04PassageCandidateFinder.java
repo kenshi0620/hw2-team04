@@ -7,9 +7,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.SortedSet;
+import java.util.StringTokenizer;
 import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.math.*;
 
 import org.apache.commons.math.linear.RealMatrix;
 import org.apache.commons.math.linear.RealMatrixImpl;
@@ -23,6 +25,7 @@ import edu.cmu.lti.oaqa.framework.data.PassageCandidate;
 import edu.cmu.lti.oaqa.framework.data.RetrievalResult;
 import edu.cmu.lti.oaqa.openqa.hello.passage.KeytermWindowScorer;
 import edu.cmu.lti.oaqa.openqa.hello.passage.PassageCandidateFinder;
+import edu.cmu.lti.oaqa.openqa.test.team04.passage.basic.IdfIndexer;
 
 public class Team04PassageCandidateFinder {
 	
@@ -94,7 +97,7 @@ public class Team04PassageCandidateFinder {
 		}
 		
 		// idf matrix
-		this.p2dMatrix = new RealMatrixImpl(data);
+		this.p2dMatrix = IdfIndexer.transform(new RealMatrixImpl(data));
 	}
 	
 	public List<PassageCandidate> extractPassages() {
@@ -117,32 +120,43 @@ public class Team04PassageCandidateFinder {
 					
 					
 					String passageText = text.substring(begin, end);
+					StringTokenizer tokenizer = new StringTokenizer(text);
+					int wordCnt = tokenizer.countTokens();
+					
 					int keyId = 0;
+					int type = 0;
 					for (String keyterm: keytermList) {
 						List<PassageSpan> spans = spanMap.get(keyterm);
+						int exist = 0;
 						for (PassageSpan span: spans) {
 							if (span.containedIn(begin, end)) {
-								score += p2dMatrix.getEntry(keyId, i);
 								cnt++;
+								exist++;
 							}
+						}
+						if (exist > 0) {
+							score += p2dMatrix.getEntry(keyId, i);
+							type++;
 						}
 						keyId++;
 					}
-					if (score == 0) {
-						System.out.println(" begin:" + begin + " end: " + end + "%%%%%" + text.substring(begin, end));
-						keyId = 0;
-						for (String keyterm: keytermList) {
-							List<PassageSpan> spans = spanMap.get(keyterm);
-							for (PassageSpan span: spans) {
-								if (text.substring(begin, end).contains(keyterm)) {
-									System.out.println("@@##@@" + " begin:" + span.begin + " end: " + span.end + text.substring(span.begin, span.end));
-								}
-							}
-							keyId++;
-						}
-					}
+//					if (score == 0) {
+//						System.out.println(" begin:" + begin + " end: " + end + "%%%%%" + text.substring(begin, end));
+//						keyId = 0;
+//						for (String keyterm: keytermList) {
+//							List<PassageSpan> spans = spanMap.get(keyterm);
+//							for (PassageSpan span: spans) {
+//								if (text.substring(begin, end).contains(keyterm)) {
+//									System.out.println("@@##@@" + " begin:" + span.begin + " end: " + span.end + text.substring(span.begin, span.end));
+//								}
+//							}
+//							keyId++;
+//						}
+//					}
 					if (score != 0)
-						score = score * (cnt / (cnt * (end - begin)));
+						// score = score * ((double)cnt / (double)(cnt * wordCnt));
+						// score = score / (double)(wordCnt);
+						score = score - ((double)type) * Math.log(end - begin + 1);
 					PassageCandidate window = null;
 					try {
 						window = new PassageCandidate( documents.get(i).getDocID() , begin , end , (float) score , null );
@@ -154,17 +168,19 @@ public class Team04PassageCandidateFinder {
 			}
 			
 		}
-		Collections.sort(result, new PassageCandidateComparator());
 		
-		System.out.println(result.size() + " " + result.get(result.size() - 1).getProbability() +"$%$%$%$" + result.get(0).getProbability());
-		if (result.size() <= 10)
-			return result;
-		
-		List<PassageCandidate> top10 = new ArrayList<PassageCandidate>();
-		for (int i = 0; i < 10; i++) {
-			top10.add(result.get(i));
-		}
-		return top10;
+		return result;
+//		Collections.sort(result, new PassageCandidateComparator());
+//		
+//		System.out.println(result.size() + " " + result.get(result.size() - 1).getProbability() +"$%$%$%$" + result.get(0).getProbability());
+//		if (result.size() <= 10)
+//			return result;
+//		
+//		List<PassageCandidate> top10 = new ArrayList<PassageCandidate>();
+//		for (int i = 0; i < 10; i++) {
+//			top10.add(result.get(i));
+//		}
+//		return top10;
 	}
 	
 	class PassageSpan {
