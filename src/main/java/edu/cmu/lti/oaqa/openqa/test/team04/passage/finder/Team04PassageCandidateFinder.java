@@ -156,7 +156,7 @@ public class Team04PassageCandidateFinder {
 					if (score != 0)
 						// score = score * ((double)cnt / (double)(cnt * wordCnt));
 						// score = score / (double)(wordCnt);
-						score = score - ((double)type) * Math.log(end - begin + 1);
+						score = score - ((double)type) * Math.log(end - begin + 1) * 2.0;
 					PassageCandidate window = null;
 					try {
 						window = new PassageCandidate( documents.get(i).getDocID() , begin , end , (float) score , null );
@@ -169,12 +169,10 @@ public class Team04PassageCandidateFinder {
 			
 		}
 		
+		Collections.sort(result, new PassageCandidateComparator());
+		
+		System.out.println(result.size() + " " + result.get(result.size() - 1).getProbability() +"$%$%$%$" + result.get(0).getProbability());
 		return result;
-//		Collections.sort(result, new PassageCandidateComparator());
-//		
-//		System.out.println(result.size() + " " + result.get(result.size() - 1).getProbability() +"$%$%$%$" + result.get(0).getProbability());
-//		if (result.size() <= 10)
-//			return result;
 //		
 //		List<PassageCandidate> top10 = new ArrayList<PassageCandidate>();
 //		for (int i = 0; i < 10; i++) {
