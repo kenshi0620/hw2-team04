@@ -81,6 +81,11 @@
 			<artifactId>commons-collections</artifactId>
 			<version>20040616</version>
 		</dependency>
+		<dependency>
+			<groupId>gov.sandia.foundry</groupId>
+			<artifactId>porter-stemmer</artifactId>
+			<version>1.4</version>
+		</dependency>
 	</dependencies>
 	<scm>
 		<connection>scm:git:git@github.com:laundry/hw2-team04.git</connection>
