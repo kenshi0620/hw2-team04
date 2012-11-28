@@ -68,6 +68,7 @@ public class Team04PassageCandidateFinder {
 		
 		int docCnt = 0;
 		for (RetrievalResult document : documents) {
+			double docWeight = document.getProbability();
 			String key = document.getDocID();
 			String text = getText(key);
 			Map<Integer, Boolean> leftMap = new HashMap<Integer, Boolean>();
@@ -85,7 +86,7 @@ public class Team04PassageCandidateFinder {
 					rightMap.put(m.end(), true);
 					spanList.add(new PassageSpan(m.start() , m.end()));
 				}
-				data[keyId][docCnt] = (double)spanList.size();
+				data[keyId][docCnt] = ((double)spanList.size()) * docWeight;
 				keyMap.put(keyterm, spanList);
 				keyId++;
 			}
@@ -114,6 +115,7 @@ public class Team04PassageCandidateFinder {
 			for ( Integer begin : leftEdges ) {
 				for ( Integer end : rightEdges ) {
 					if ( end <= begin ) continue;
+					//if ( end > begin + 1000) continue;
 					
 					double score = 0;
 					int cnt = 0;
@@ -153,10 +155,10 @@ public class Team04PassageCandidateFinder {
 //							keyId++;
 //						}
 //					}
-					if (score != 0)
+					//if (score != 0)
 						// score = score * ((double)cnt / (double)(cnt * wordCnt));
 						// score = score / (double)(wordCnt);
-						score = score - ((double)type) * Math.log(end - begin + 1) * 2.0;
+						score = score - ((double)type) * Math.log(end - begin + 1);
 					PassageCandidate window = null;
 					try {
 						window = new PassageCandidate( documents.get(i).getDocID() , begin , end , (float) score , null );
@@ -168,11 +170,22 @@ public class Team04PassageCandidateFinder {
 			}
 			
 		}
-		
+		if (result.size() == 0) {
+			return result;
+		}
 		Collections.sort(result, new PassageCandidateComparator());
+		List<PassageCandidate> newResult = new ArrayList<PassageCandidate>();
 		
-		System.out.println(result.size() + " " + result.get(result.size() - 1).getProbability() +"$%$%$%$" + result.get(0).getProbability());
-		return result;
+		double max = result.get(0).getProbability();
+		double min = result.get(result.size() - 1).getProbability();
+		for (PassageCandidate p: result) {
+			if (p.getProbability() > 0.5 * min + 0.5 * max) {
+				newResult.add(p);
+			}
+		}
+		
+		System.out.println(newResult.size() + " " + newResult.get(newResult.size() - 1).getProbability() +"$%$%$%$" + newResult.get(0).getProbability());
+		return newResult;
 //		
 //		List<PassageCandidate> top10 = new ArrayList<PassageCandidate>();
 //		for (int i = 0; i < 10; i++) {

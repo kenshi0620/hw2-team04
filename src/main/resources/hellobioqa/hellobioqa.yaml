@@ -24,7 +24,7 @@ pipeline:
   - inherit: jdbc.sqlite.cse.phase  
     name: passage-extractor
     options: |
-      - inherit: hellobioqa.passage.simple
+      - inherit: hellobioqa.team04.passage.Team04PassageExtrator
       
   - inherit: helloqa.eval.keyterm-aggregator-consumer
 
