@@ -98,7 +98,7 @@ public class AustinMaKeytermExtractor extends AbstractKeytermExtractor {
       if (start != 0 && sentenceText.charAt(start - 1) != ' ')
         continue;
 
-      for (int end = start + 1; end < sentenceText.length(); end++) {
+      for (int end = start + 1; end < sentenceText.length() && end < start + 97; end++) {
         if (end != sentenceText.length() - 1 && sentenceText.charAt(end + 1) != ' ')
           continue;
 
