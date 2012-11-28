@@ -71,7 +71,7 @@ public class Team04RetrievalStrategist extends AbstractRetrievalStrategist {
                 (Float) doc.getFieldValue("score"), queryString);
         r.setRank(i++);
         result.add(r);
-        System.out.println(" SUP DOC: " + doc.getFieldValue("id") + " ranked at " + r.getRank()
+        System.out.println(" DOC: " + doc.getFieldValue("id") + " ranked at " + r.getRank()
                 + " or " + (Float) doc.getFieldValue("score"));
       }
     } catch (Exception e) {
@@ -81,7 +81,6 @@ public class Team04RetrievalStrategist extends AbstractRetrievalStrategist {
   }
 
   protected String formulateQuery(String questionText, List<Keyterm> keyterms) {
-    // SpellChecker sc = new CompiledSpellChecker(null, null, null);
     StringBuffer result = new StringBuffer();
     for (Keyterm keyterm : keyterms) {
       System.out.println(" TRANSFORM: " + keyterm.getText() + " --> " + stem(keyterm.getText()));
@@ -91,7 +90,7 @@ public class Team04RetrievalStrategist extends AbstractRetrievalStrategist {
     }
     result.append(questionText);
     String query = result.toString();
-    System.out.println(" QUEREAL: " + query);
+    System.out.println(" QUERY: " + query);
     return query;
   }
 
