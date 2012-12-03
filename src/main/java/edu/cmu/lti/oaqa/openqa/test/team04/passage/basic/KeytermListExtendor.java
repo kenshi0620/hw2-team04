@@ -80,7 +80,7 @@ public class KeytermListExtendor {
       int start = 0;
       int end = 0;
       int countExtendedWords = 0;
-      while (start != -1 && end != -1 && countExtendedWords<2) {
+      while (start != -1 && end != -1 && countExtendedWords<3) {
         start = curStr.indexOf("<td class=\"name\">", end + 3) + 17;
         if (start == 16)
           break;
