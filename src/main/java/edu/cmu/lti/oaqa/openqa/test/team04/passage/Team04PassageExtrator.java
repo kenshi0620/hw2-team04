@@ -1,5 +1,6 @@
 package edu.cmu.lti.oaqa.openqa.test.team04.passage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +20,7 @@ import edu.cmu.lti.oaqa.openqa.hello.passage.KeytermWindowScorerSum;
 import edu.cmu.lti.oaqa.openqa.hello.passage.PassageCandidateFinder;
 import edu.cmu.lti.oaqa.openqa.hello.passage.SimplePassageExtractor;
 import edu.cmu.lti.oaqa.openqa.test.team04.passage.basic.IdfIndexer;
+import edu.cmu.lti.oaqa.openqa.test.team04.passage.basic.KeytermListExtendor;
 import edu.cmu.lti.oaqa.openqa.test.team04.passage.basic.VectorGenerator;
 import edu.cmu.lti.oaqa.openqa.test.team04.passage.finder.Team04PassageCandidateFinder;
 
@@ -27,9 +29,19 @@ public class Team04PassageExtrator extends SimplePassageExtractor {
   @Override
   protected List<PassageCandidate> extractPassages(String question, List<Keyterm> keyterms,
           List<RetrievalResult> documents) {
+
+    KeytermListExtendor myKLE = new  KeytermListExtendor(); 
+    try {
+      keyterms = myKLE.KeytermListExtendor(keyterms);
+    } catch (IOException e1) {
+      e1.printStackTrace();
+    }
+    
+    System.out.println(keyterms.toString());
+    
 	  if (keyterms.size() == 0 || documents.size() == 0)
 		  return new ArrayList<PassageCandidate>();
-	  
+
 	  Team04PassageCandidateFinder finder;
 	  try {
 		  finder = new Team04PassageCandidateFinder(keyterms, documents, wrapper);
@@ -39,9 +51,6 @@ public class Team04PassageExtrator extends SimplePassageExtractor {
 		  e.printStackTrace();
 	  }
 	  return null;
-	
-	  
-	  
   }
 
 }

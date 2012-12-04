@@ -158,7 +158,11 @@ public class Team04PassageCandidateFinder {
 					//if (score != 0)
 						// score = score * ((double)cnt / (double)(cnt * wordCnt));
 						// score = score / (double)(wordCnt);
-						score = score - ((double)type) * Math.log(end - begin + 1);
+						//score = score - ((double)type) * Math.log(end - begin + 1);
+					String cleanPassageText = Jsoup.parse(passageText).text().replaceAll("([\177-\377\0-\32]*)", "");
+					int windowLength = cleanPassageText.length();
+					score = score - ((double)type) * Math.log(windowLength);
+					
 					PassageCandidate window = null;
 					try {
 						window = new PassageCandidate( documents.get(i).getDocID() , begin , end , (float) score , null );
@@ -229,13 +233,21 @@ public class Team04PassageCandidateFinder {
 	        String htmlText = wrapper.getDocText(id);
 
 	        // cleaning HTML text
-	        text = Jsoup.parse(htmlText).text().replaceAll("([\177-\377\0-\32]*)", "")/* .trim() */;
+	        //text = Jsoup.parse(htmlText).text().replaceAll("([\177-\377\0-\32]*)", "")/* .trim() */;
 	        // for now, making sure the text isn't too long
-	        text = text.substring(0, Math.min(5000, text.length()));
+	        // try to clean the text by starting from the first passage in the document
+          /*
+	        Pattern p = Pattern.compile( "<P>" );
+          Matcher m = p.matcher( text );
+          if ( m.find() ) {
+            text = text.substring(m.start());
+          }
+          */
+          text = htmlText;
+          text = text.substring(0, Math.min(5500, text.length()));
 	      } catch (SolrServerException e) {
 	        e.printStackTrace();
 	      }
 		return text;
 	}
-
 }
