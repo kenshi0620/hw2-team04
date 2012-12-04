@@ -17,46 +17,77 @@ import java.util.regex.Pattern;
 import edu.cmu.lti.oaqa.framework.data.Keyterm;
 
 public class KeytermListExtendor {
-  
-  public List<Keyterm> KeytermListExtendor (List<Keyterm> keyterms) throws IOException  {
-    
+
+  @SuppressWarnings("deprecation")
+  public static List<Keyterm> wikipediaRedirect(List<Keyterm> keyterms) throws IOException {
+    List<Keyterm> extendedKeyterms = new ArrayList<Keyterm>();
+    /*
+    URL url = new URL("http://reap.cs.cmu.edu:8080/WikiRedirect/demo");
+    URLConnection conn = url.openConnection();
+    conn.setDoOutput(true);
+    OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
+    for (Keyterm keyterm : keyterms) {
+      writer.write("str[]=" + keyterm + "&");
+    }
+    writer.flush();
+    */
+    String block = "http://reap.cs.cmu.edu:8080/WikiRedirect/demo?";
+    for (Keyterm keyterm : keyterms) {
+      block += "str[]=" + java.net.URLEncoder.encode(keyterm.toString()) + "&";
+    }
+    System.out.println("hello, " + block);
+    URL url = new URL(block);
+    URLConnection conn = url.openConnection();
+    conn.setDoOutput(true);
+    BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+    StringBuffer htmlFile = new StringBuffer();
+    String line;
+    while ((line = reader.readLine()) != null) {
+      htmlFile.append(line);
+    }
+    String[] lines = htmlFile.toString().split("\n");
+    for (String pair : lines) {
+      System.out.println("##" + pair);
+      try {
+        System.out.println("!!" + pair.substring(pair.indexOf(";") + 1));
+        extendedKeyterms.add(new Keyterm(pair.substring(pair.indexOf(";") + 1)));
+      } catch (Exception e) {
+        System.out.println("??");
+        e.printStackTrace();
+      }
+    }
+    return extendedKeyterms;
+  }
+
+  public static List<Keyterm> KeytermListExtendor(List<Keyterm> keyterms) throws IOException {
+
     List<Keyterm> extendedKeyterms = new ArrayList<Keyterm>();
     List<String> extendedKeytermsString = new ArrayList<String>();
-    
+
     for (Keyterm keyterm : keyterms) {
       extendedKeytermsString.add(keyterm.getText());
-      
+
       // check synonyms of keyterm online and return at most top 3
-      
-      /*String keytermName = keyterm.getText();
-      String requestURL = "http://words.bighugelabs.com/api/2/8b07b554c6ac13b40d590164d388395c/"
-      + keytermName +"/";
-      
-      URL url = null;
-      url = new URL(requestURL);
-      HttpURLConnection connection = (HttpURLConnection) url.openConnection();  
-      
-      
-      int responeCode = connection.getResponseCode();
-      if (responeCode == 404) continue;
-      
-      InputStream in = connection.getInputStream();
-      BufferedReader bin = new BufferedReader(new InputStreamReader(in, "GB2312"));
-      
-      int count = 0;
-      String line = bin.readLine();
-      while (count < 1 || line != null) {
-        Pattern myPattern = Pattern.compile(".*\\|.*\\|(.*)");
-        Matcher matcher = myPattern.matcher(line);
-        if (matcher.find()) {
-          Keyterm synonyms = new Keyterm (matcher.group(1));
-          extendedKeyterms.add(synonyms);
-        }
-        count++;
-        line = bin.readLine();
-      }
-    }*/
-      
+
+      /*
+       * String keytermName = keyterm.getText(); String requestURL =
+       * "http://words.bighugelabs.com/api/2/8b07b554c6ac13b40d590164d388395c/" + keytermName +"/";
+       * 
+       * URL url = null; url = new URL(requestURL); HttpURLConnection connection =
+       * (HttpURLConnection) url.openConnection();
+       * 
+       * 
+       * int responeCode = connection.getResponseCode(); if (responeCode == 404) continue;
+       * 
+       * InputStream in = connection.getInputStream(); BufferedReader bin = new BufferedReader(new
+       * InputStreamReader(in, "GB2312"));
+       * 
+       * int count = 0; String line = bin.readLine(); while (count < 1 || line != null) { Pattern
+       * myPattern = Pattern.compile(".*\\|.*\\|(.*)"); Matcher matcher = myPattern.matcher(line);
+       * if (matcher.find()) { Keyterm synonyms = new Keyterm (matcher.group(1));
+       * extendedKeyterms.add(synonyms); } count++; line = bin.readLine(); } }
+       */
+
       URL url = new URL("http://gpsdb.expasy.org/cgi-bin/gpsdb/show");
       URLConnection conn = url.openConnection();
       conn.setDoOutput(true);
@@ -65,35 +96,34 @@ public class KeytermListExtendor {
       // write parameters
       writer.write("name=" + keyterm + "&species=&taxo=0&source=HGNC&type=gene");
       writer.flush();
-      
-   // Get the response
+
+      // Get the response
       BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
       StringBuffer htmlFile = new StringBuffer();
       String line;
 
       while ((line = reader.readLine()) != null) {
-            htmlFile.append(line);
+        htmlFile.append(line);
       }
-      
+
       // Output the response
       String curStr = htmlFile.toString();
       int start = 0;
       int end = 0;
       int countExtendedWords = 0;
-      while (start != -1 && end != -1 && countExtendedWords<3) {
+      while (start != -1 && end != -1 && countExtendedWords < 3) {
         start = curStr.indexOf("<td class=\"name\">", end + 3) + 17;
         if (start == 16)
           break;
         end = curStr.indexOf("</td>", start);
-        if (!extendedKeytermsString.contains(curStr.substring(start, end)))
-          {
-            extendedKeytermsString.add(curStr.substring(start, end));
-            countExtendedWords++;
-          }
-       } 
+        if (!extendedKeytermsString.contains(curStr.substring(start, end))) {
+          extendedKeytermsString.add(curStr.substring(start, end));
+          countExtendedWords++;
+        }
+      }
     }
-    for (String keytermString : extendedKeytermsString ) {
-      Keyterm newKeyterm = new Keyterm (keytermString);
+    for (String keytermString : extendedKeytermsString) {
+      Keyterm newKeyterm = new Keyterm(keytermString);
       extendedKeyterms.add(newKeyterm);
     }
     return extendedKeyterms;

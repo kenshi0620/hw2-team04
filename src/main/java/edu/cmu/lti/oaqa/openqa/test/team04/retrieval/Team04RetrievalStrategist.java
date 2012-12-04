@@ -1,7 +1,11 @@
 package edu.cmu.lti.oaqa.openqa.test.team04.retrieval;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.common.SolrDocument;
@@ -15,7 +19,7 @@ import edu.cmu.lti.oaqa.core.provider.solr.SolrWrapper;
 import edu.cmu.lti.oaqa.cse.basephase.retrieval.AbstractRetrievalStrategist;
 import edu.cmu.lti.oaqa.framework.data.Keyterm;
 import edu.cmu.lti.oaqa.framework.data.RetrievalResult;
-import edu.washington.cs.knowitall.morpha.MorphaStemmer;
+import edu.cmu.lti.oaqa.openqa.test.team04.passage.basic.KeytermListExtendor;
 
 public class Team04RetrievalStrategist extends AbstractRetrievalStrategist {
 
@@ -82,7 +86,39 @@ public class Team04RetrievalStrategist extends AbstractRetrievalStrategist {
 
   protected String formulateQuery(String questionText, List<Keyterm> keyterms) {
     StringBuffer result = new StringBuffer();
-    for (Keyterm keyterm : keyterms) {
+    List<Keyterm> shrunk = new ArrayList<Keyterm>();
+    for (Keyterm keyterm : keyterms){
+      if (keyterm.toString().equals("th"))
+      {
+        continue;
+      }
+      shrunk.add(keyterm);
+    }
+    List<Keyterm> extended = new ArrayList<Keyterm>();
+    System.err.println("0: " + shrunk.toString());
+    // wikipedia redirect
+    try {
+      extended = KeytermListExtendor.wikipediaRedirect(shrunk);
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+      extended = new ArrayList<Keyterm>();
+    }
+    System.err.println("1: " + extended.toString());
+    // random website
+    try {
+      extended = KeytermListExtendor.KeytermListExtendor(shrunk);
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+      extended = new ArrayList<Keyterm>();
+    }
+    System.err.println("2: " + extended.toString());
+    // add back originals
+    for (Keyterm keyterm : shrunk) {
+      extended.add(keyterm);
+    }
+    for (Keyterm keyterm : extended) {
       System.out.println(" TRANSFORM: " + keyterm.getText() + " --> " + stem(keyterm.getText()));
       // System.out.println(" TRANSFORM: " + keyterm.getText() + " --> "
       // + MorphaStemmer.stemToken(keyterm.getText()));
