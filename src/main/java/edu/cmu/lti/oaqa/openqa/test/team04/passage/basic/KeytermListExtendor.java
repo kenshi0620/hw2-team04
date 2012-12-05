@@ -21,6 +21,10 @@ public class KeytermListExtendor {
   @SuppressWarnings("deprecation")
   public static List<Keyterm> wikipediaRedirect(List<Keyterm> keyterms) throws IOException {
     List<Keyterm> extendedKeyterms = new ArrayList<Keyterm>();
+    if (keyterms.size() == 0)
+    {
+      return extendedKeyterms;
+    }
     /*
     URL url = new URL("http://reap.cs.cmu.edu:8080/WikiRedirect/demo");
     URLConnection conn = url.openConnection();
@@ -43,9 +47,9 @@ public class KeytermListExtendor {
     StringBuffer htmlFile = new StringBuffer();
     String line;
     while ((line = reader.readLine()) != null) {
-      htmlFile.append(line);
+      htmlFile.append(line+"!!!");
     }
-    String[] lines = htmlFile.toString().split("\n");
+    String[] lines = htmlFile.toString().split("!!!");
     for (String pair : lines) {
       System.out.println("##" + pair);
       try {
