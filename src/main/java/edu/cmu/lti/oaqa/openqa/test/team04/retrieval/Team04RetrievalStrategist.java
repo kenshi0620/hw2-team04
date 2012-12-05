@@ -92,10 +92,6 @@ public class Team04RetrievalStrategist extends AbstractRetrievalStrategist {
     StringBuffer result = new StringBuffer();
     List<Keyterm> shrunk = new ArrayList<Keyterm>();
     for (Keyterm keyterm : keyterms){
-      if (keyterm.toString().equals("th"))
-      {
-        continue;
-      }
       shrunk.add(keyterm);
     }
     keyterms = new ArrayList<Keyterm>();
@@ -119,6 +115,7 @@ public class Team04RetrievalStrategist extends AbstractRetrievalStrategist {
     } catch (IOException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
+      extended = new ArrayList<Keyterm>();
     }
     for (Keyterm keyterm : extended) {
       keyterms.add(keyterm);
@@ -129,14 +126,15 @@ public class Team04RetrievalStrategist extends AbstractRetrievalStrategist {
       keyterms.add(keyterm);
     }
     Set<Keyterm> uniques = new HashSet<Keyterm>(Arrays.asList(keyterms.toArray()));
-    for (Keyterm keyterm : keyterms) {
+    for (Keyterm keyterm : uniques) {
       boolean hasNumber = hasNumber(keyterm.getText()) && keyterm.getText().length() > 1;
       if (keyterm.getText().length() > 2 || hasNumber)
       {
         System.out.println(" TRANSFORM: " + keyterm.getText() + " --> " + stem(keyterm.getText()));
         // System.out.println(" TRANSFORM: " + keyterm.getText() + " --> "
         // + MorphaStemmer.stemToken(keyterm.getText()));
-        result.append("\"" + stem(keyterm.getText()) + "*\" ");
+        result.append("\"" + keyterm.getText() + "\" ");
+        //result.append("\"" + stem(keyterm.getText()) + "*\" ");
       }
     }
     result.append(questionText);
@@ -153,14 +151,14 @@ public class Team04RetrievalStrategist extends AbstractRetrievalStrategist {
     {
       if (ns.contains(String.valueOf(c)))
       {
-        return false;
+        return true;
       }
     }
-    return true;
+    return false;
   }
 
   private String stem(String s) {
-    if (s.length() > 5)
+    if (s.length() > 0)
     {
       Stemmer stemmer = new Stemmer();
       stemmer.add(s.toCharArray(), s.length());

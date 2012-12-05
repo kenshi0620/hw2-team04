@@ -25,16 +25,6 @@ public class KeytermListExtendor {
     {
       return extendedKeyterms;
     }
-    /*
-    URL url = new URL("http://reap.cs.cmu.edu:8080/WikiRedirect/demo");
-    URLConnection conn = url.openConnection();
-    conn.setDoOutput(true);
-    OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
-    for (Keyterm keyterm : keyterms) {
-      writer.write("str[]=" + keyterm + "&");
-    }
-    writer.flush();
-    */
     String block = "http://reap.cs.cmu.edu:8080/WikiRedirect/demo?";
     for (Keyterm keyterm : keyterms) {
       block += "str[]=" + java.net.URLEncoder.encode(keyterm.toString()) + "&";
@@ -43,22 +33,30 @@ public class KeytermListExtendor {
     URL url = new URL(block);
     URLConnection conn = url.openConnection();
     conn.setDoOutput(true);
-    BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-    StringBuffer htmlFile = new StringBuffer();
-    String line;
-    while ((line = reader.readLine()) != null) {
-      htmlFile.append(line+"!!!");
-    }
-    String[] lines = htmlFile.toString().split("!!!");
-    for (String pair : lines) {
-      System.out.println("##" + pair);
-      try {
-        System.out.println("!!" + pair.substring(pair.indexOf(";") + 1));
-        extendedKeyterms.add(new Keyterm(pair.substring(pair.indexOf(";") + 1)));
-      } catch (Exception e) {
-        System.out.println("??");
-        e.printStackTrace();
+    try
+    {
+      BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+      StringBuffer htmlFile = new StringBuffer();
+      String line;
+      while ((line = reader.readLine()) != null) {
+        htmlFile.append(line+"!!!");
       }
+      String[] lines = htmlFile.toString().split("!!!");
+      for (String pair : lines) {
+        System.out.println("##" + pair);
+        try {
+          System.out.println("!!" + pair.substring(pair.indexOf(";") + 1));
+          extendedKeyterms.add(new Keyterm(pair.substring(pair.indexOf(";") + 1)));
+        } catch (Exception e) {
+          System.out.println("??");
+          e.printStackTrace();
+        }
+      }
+    }
+    catch (IOException e)
+    {
+      e.printStackTrace();
+      return extendedKeyterms;
     }
     return extendedKeyterms;
   }
