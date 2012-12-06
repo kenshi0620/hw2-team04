@@ -37,7 +37,7 @@ public class AustinMaKeytermExtractor extends AbstractKeytermExtractor {
    * Ling pipe chunker that will do the NER for us
    */
   Chunker chunker;
-  
+
   /**
    * HashSet dictionary to hold known gene names
    */
@@ -83,7 +83,7 @@ public class AustinMaKeytermExtractor extends AbstractKeytermExtractor {
 
   @Override
   protected List<Keyterm> getKeyterms(String text) {
-    
+
     List<Keyterm> keyTerms = new ArrayList<Keyterm>();
     Chunking chunking = chunker.chunk(text);
     for (Chunk chunk : chunking.chunkSet()) {
@@ -92,14 +92,14 @@ public class AustinMaKeytermExtractor extends AbstractKeytermExtractor {
       String term = text.substring(start, end);
       keyTerms.add(new Keyterm(term));
     }
-    
+
     String sentenceText = text;
     for (int start = 0; start < sentenceText.length(); start++) {
       if (start != 0 && sentenceText.charAt(start - 1) != ' ')
         continue;
 
       for (int end = start + 1; end < sentenceText.length() && end < start + 97; end++) {
-        if (end != sentenceText.length() - 1 && sentenceText.charAt(end + 1) != ' ')
+        if (end != sentenceText.length() - 1 && sentenceText.charAt(end) != ' ')
           continue;
 
         String spanText = sentenceText.substring(start, end);

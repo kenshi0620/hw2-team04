@@ -41,7 +41,6 @@
 18s ribosome rna
 18s rrna
 19s
-1a
 1-desamino-8-d-arginine vasopressin
 1-fft
 1-sst
@@ -142,7 +141,6 @@
 5.8s-like structure
 5.8ss rrna
 5alpha-reductase
-5b
 5' c-sis exon
 5-ht1a receptors
 5-ht1 site
@@ -246,7 +244,6 @@ abl
 abl tyrosine kinase
 abp1
 abr
-ac
 ac allele
 acan125
 acbp2
@@ -392,7 +389,6 @@ adrenocorticotropin
 adx factor
 aeg-46.5 operon
 aep
-af
 af154055
 af1q translocation gene
 af-6
@@ -729,7 +725,6 @@ antithrombin iii
 anti-tyr(p)
 anti-viral proteins
 anu2p
-ap
 ap1
 ap-1
 ap1 bearing promoter
@@ -829,7 +824,6 @@ aps kinase
 apxii
 aqp-2
 aquaporins
-ar
 ar1
 arabidopsis alcohol dehydrogenase
 arabidopsis atmpk1 kinases
@@ -1009,7 +1003,6 @@ axonemal dynein gene
 azf1
 azf1p
 azo dye reductase
-b"
 b29 genes
 b2m loci
 b4 rna
@@ -1079,7 +1072,6 @@ bax
 bax
 b block
 bbtv coat protein
-bc
 bcd
 b cell ag receptor
 b cell antigen receptor
@@ -1373,7 +1365,6 @@ bzip transcriptional activators
 bzlf1
 bzlf1 promoter
 bzp2 cdna (115-1914 nt, 1.8 kb)
-c'
 c1
 c1-esterase inhibitor
 c1f
@@ -1409,7 +1400,6 @@ c4b proteins
 c4 photosynthesis genes
 c5 alpha-chain
 c6
-ca
 ca125
 ca 125
 ca 19-9
@@ -1932,7 +1922,6 @@ cgs1+
 cgs2+
 c-gvpd
 c-gvpe
-ch
 ch1
 ch28
 ch3 domain
@@ -2033,8 +2022,6 @@ chromosome transmission fidelity
 chs1 gene
 chs promoters
 chymotrypsin
-ci
-ci
 c-iap1
 c-iap2 promoter
 cic2b9
@@ -2083,7 +2070,6 @@ c-jun n-terminal kinases
 c-jun n-terminal protein kinase
 c-jun promoter
 c-jun protooncogenes
-ck
 ckappa1 gene locus
 ckbeta4gt-ii
 ckb mrna
@@ -2309,8 +2295,6 @@ cox5b
 coxi genes
 coxiv promoter
 coxvb genes
-cp
-cp
 cp2 family proteins
 cpa1
 cpa1 gene
@@ -2460,7 +2444,6 @@ cstf
 c subunits
 csx
 csx1
-ct
 cta(t/a)4tag
 ctbp1
 ctbp2
@@ -2510,7 +2493,6 @@ cvn
 cwg2
 cwg2-1 mutation
 cwg2p
-cx
 c-x-c chemokines
 cxcr2
 cxcr4
@@ -2663,7 +2645,6 @@ cytosolic tyrosine phosphatase
 cytotactin gene
 cytr
 cytr protein
-d
 d1
 d10s94 locus
 d11s1765
@@ -2800,7 +2781,6 @@ dgk
 dgk
 dgk gene
 dguo
-dh
 dharma
 dhb
 dhfr
@@ -2913,7 +2893,6 @@ double-stranded rna (dsrna)-activated ser/thr protein kinase
 double-stranded-rna-specific adenosine deaminase
 dox-a2 locus
 dox-a2 orf
-dp
 dp1
 dp-1
 dp1a
@@ -2986,7 +2965,6 @@ drosophila trithorax gene product
 drosophila ubcd1
 drs2 mutation
 drtf1
-ds
 ds2
 dsbp
 dsg
@@ -3022,7 +3000,6 @@ dynamin
 dynein heavy chain genes
 dyneins
 dyz3 satellite sequences
-e
 e1
 e12
 e12 bhlh protein
@@ -3277,7 +3254,6 @@ emapii domain
 embp-1
 emerin
 e mu pim-1
-en
 ena1
 ena-tre
 enbp1
@@ -3344,7 +3320,6 @@ env genes
 enzyme i
 enzyme smai
 eotaxin-3
-ep
 ep4r cdna
 epb7.2,hc,gsn
 e(pc)
@@ -3391,7 +3366,6 @@ epstein-barr virus latent membrane protein 1
 epstein-barr virus nuclear antigen 2
 epstein-barr virus nuclear protein 2
 epstein-barr virus transactivator zta
-er
 er(+)
 er1
 er2
@@ -3585,7 +3559,6 @@ extracellular signal-related kinase kinase
 ezh1
 ezh1 protein
 ezrin binding protein
-f
 f0
 f1
 f1 atpase
@@ -3665,7 +3638,6 @@ fbp1
 fbp1 promoter constructs
 fbpa operator sequence (42 bp)
 fbr protein
-fc
 fc3
 fcalphar
 fcalphari
@@ -3684,7 +3656,6 @@ fcr1 gene
 fcr1p
 fc receptor
 fc-receptor
-fd
 fdp
 fdp1
 fds operon
@@ -3702,7 +3673,6 @@ fes protein
 fe/s proteins
 fetal gamma-globin genes
 f factor
-fg
 fgd1
 fgd3
 fgf
@@ -3787,7 +3757,6 @@ fkbp mrna
 fkh
 fkhr
 fkhr-l1
-fl
 fla gene
 flame-1
 flan
@@ -3817,7 +3786,6 @@ flt3
 fmlf-r gene
 fmlf-r transcripts
 fmo
-fn
 fnr
 fnrn gene
 fnr-type promoter
@@ -4143,7 +4111,6 @@ gcv
 gdf-9
 gdp-gtp exchange factor
 gdp/gtp exchange proteins
-ge
 ge6
 gef
 gelsolin
@@ -4194,8 +4161,6 @@ ggs1
 ggt
 ggt mrna
 ggtp
-gh
-gh
 g hb
 ghbp
 ghbp mrna
@@ -4212,7 +4177,6 @@ ghr mrna
 ghs-r
 ghs-r-related gene
 ghs-r variants
-gi
 gialpha
 gibbon ape leukemia virus envelope proteins
 g(i) family
@@ -4228,7 +4192,6 @@ git3
 git5
 git7
 git8
-gk
 gk deletion mutants
 gklf
 gl2
@@ -4337,7 +4300,6 @@ gonadotrophins
 gonadotropin
 gonadotropin
 gonadotropins
-gp
 gp100
 gp100 ag
 gp120
@@ -4406,7 +4368,6 @@ gq/11
 g(q)-coupled receptors
 gq family
 g(q)/q209l
-gr
 graf2
 gramicidin s synthetase 2 gene
 granin family
@@ -4464,7 +4425,6 @@ grp58
 grp78
 grp78
 grpe
-gs
 gsc
 gse
 gse element
@@ -4510,8 +4470,6 @@ gypsy insulator sequences
 gypsy-like elements
 gyra-protein
 gyrase
-h
-h'
 h1
 h1.8
 h19
@@ -4551,7 +4509,6 @@ h4-fo108 gene
 h4-i gene
 h4 promoter
 h5 promoter
-ha
 ha-
 hac1
 h/aca snornas
@@ -4585,8 +4542,6 @@ ha-synthesizing enzyme
 hat
 hatp1 gene
 ha trimer
-hb
-hb
 hb1f
 hba1
 hba1c
@@ -4633,7 +4588,6 @@ hc-pro
 hcr
 hcrbp1 gene
 hcyct1
-hd
 hd2
 hdac1
 hdac9
@@ -4787,8 +4741,6 @@ hgmr beta subunit mutants
 hgnrhr
 hgralpha
 hgrbeta
-hh
-hh
 hhr23 proteins
 hhsf1
 hhv-6a(u1102) genomic bamhi g fragment
@@ -4874,7 +4826,6 @@ hiv reverse transcriptase
 hiv tat
 hkid
 hkid coding sequence
-hl
 hla
 hla-5.4
 hla-a
@@ -4945,7 +4896,6 @@ hmt-iia gene
 hmw1
 hmw3
 hmw isoform
-hn
 hnf1
 hnf-1
 hnf1alpha
@@ -5556,7 +5506,6 @@ icr2 motif
 i-crei
 ics
 icsbp
-id
 id1
 id1 mrna
 id3
@@ -5564,7 +5513,6 @@ id4 promoter
 ids3
 id-scl
 idx-1 mutant proteins
-ie
 ie0 gene
 ie1
 ie110
@@ -5612,7 +5560,6 @@ ifn response factors
 ifns
 ifn-stimulated gene factor-3
 ifn-stimulated response element
-ig
 iga
 iga lambda
 ig-alpha
@@ -5915,7 +5862,6 @@ ipl1 gene
 ipns tsp
 i-pou
 ipth
-ir
 ir5 orf
 ira1
 ira2
@@ -5972,7 +5918,6 @@ ivanolysin o
 ivig
 ivs2c beta 1
 ivs3
-j
 jacalin lectin
 jack bean meal urease
 jadm
@@ -6001,13 +5946,10 @@ jbeta12-rsss
 jdelta1
 jem
 jem-1
-jh
 jh1
 jh2
-jk
 jkappa
 jkappa dna-binding sites
-jl
 jnk
 jnk1
 jnk2
@@ -6094,7 +6036,6 @@ ki-ras
 ki-ras4bval-12
 kix domain
 kks
-kl
 klaa
 klab polypeptides
 klac polypeptide
@@ -6107,7 +6048,6 @@ kmmig1p
 kp2
 k. pneumoniae nifh promoter
 kpni
-kr
 krab
 krab-a domain
 krab domain
@@ -6132,12 +6072,10 @@ k-sam
 kshv/rta gene
 ksr
 kss1
-ku
 kua
 kua domain
 kv1.5 gene
 kv4 family members
-l
 l1
 l10e
 l11
@@ -6155,7 +6093,6 @@ l1 sequence
 l2
 l7
 l7 gene
-la
 lac
 lac
 lac-1
@@ -6286,10 +6223,8 @@ lexa repressor
 lf-a1
 lfa-3
 lf-h3 beta
-lg
 lg modules
 lgr
-lh
 lha2 mrnas
 lha4
 lhbeta
@@ -6378,7 +6313,6 @@ lps1 beta promoter
 lps1 rna
 lps-and il-1-responsive element
 lp-x
-lr
 lrh
 lrn
 lrp
@@ -6387,7 +6321,6 @@ lrp-2
 lrr domain
 lru1
 l-selectin
-lt
 ltbp-1
 ltc(4)s gene
 ltk
@@ -6454,7 +6387,6 @@ lysr superfamily
 lysr-type regulator catr
 lysu
 lysyl endoprotease
-m
 m1-creb
 m1r
 m2ach-muscarinic and alpha2a-adrenergic receptors
@@ -6618,7 +6550,6 @@ mature tobacco l12 protein
 ma type
 max
 max rna
-mb
 mb-1
 mb cdna
 mbd
@@ -6688,8 +6619,6 @@ mdv-1 bamhi-d dna fragment
 mdv2 ul10 protein
 mdv2 ul54
 mdv-c2
-me
-me
 me1a1
 me26 viral protein
 me31b cdna
@@ -7021,7 +6950,6 @@ m-protein
 m proteins
 mps1 open reading frame
 mq9b
-mr
 mr6
 m-ras
 mre11
@@ -7072,7 +7000,6 @@ msx-1
 msx2
 msy2
 msy2 mrna
-mt
 mta1
 mtase gene
 mterf
@@ -7090,7 +7017,6 @@ mts1
 mts1
 mts2
 mtx minimal promoter
-mu
 mu1
 mu1
 mu2
@@ -7272,7 +7198,6 @@ myrsos1-deltac
 mzf-1
 mzf1b
 mzf1c
-n
 n1(deltaec)
 n1l orf
 n2403
@@ -7320,7 +7245,6 @@ nbf2 domain
 nbf2 protein
 nbphox
 nbs1
-nc
 nca
 n-cadherin
 nc domain
@@ -7338,7 +7262,6 @@ ndei restriction site
 ndf
 ndp-k beta
 ndrf
-ne
 nedd4
 nedd-4
 nef
@@ -7580,7 +7503,6 @@ notch homologue
 notch(ic)
 notch motifs
 noti repeat promoter
-np
 npat
 npkc
 npl3p
@@ -7592,7 +7514,6 @@ nqo1 gene
 nqo2
 nqo2 gene
 nqo gene family
-nr
 nr5a2
 nramp
 nramp1
@@ -7726,7 +7647,6 @@ o2
 o2 box
 o2 site
 o7-lps region
-oa
 o-acetylserine (thiol) lyases
 oasa2 gene
 oas gene family
@@ -7736,8 +7656,6 @@ obf1 protein
 obfs
 obp transcript
 ob-r
-oc
-oc
 oc box i
 oc cdna
 occludin
@@ -7789,7 +7707,6 @@ okt8+
 oleosin
 oleosin gene
 oleosin promoter
-om
 omb
 ompa
 oncogene jun
@@ -7875,7 +7792,6 @@ oxyr
 oxyr-c199s
 oxytocin
 oxytocinase
-p
 p0 transcripts
 p1
 p105
@@ -8126,7 +8042,6 @@ p95 component
 p95vav
 p96h2bk
 p97
-pa
 pa700
 pabp
 pac1
@@ -8238,7 +8153,6 @@ pbx1 sites
 pbx3
 pbx dimer partner
 pbx homeodomain protein families
-pc
 pc-1
 pc2 protein
 pc4
@@ -8272,7 +8186,6 @@ pc protein
 pcr1
 p/c-specific mrna
 pctr1 locus
-pd
 pde3a
 pde4a
 pde4a-subfamily-specific linker region
@@ -8399,8 +8312,6 @@ pgs-2
 p-gvpe
 p-gvpf
 p-gvpf-m mrna
-ph
-ph
 pha
 phage lambda ci repressor
 phage m13 coat protein
@@ -8518,7 +8429,6 @@ pituitary thyrotropin
 pitx2
 pix
 pixy321
-pk
 pka
 pka rii
 pkas
@@ -8759,7 +8669,6 @@ pou-specific
 pou-specific domain
 pou-type homeodomain protein
 poz/zn finger protein
-pp
 pp1
 pp120
 pp14
@@ -8802,7 +8711,6 @@ ppt1
 ppt2
 ppz1
 ppz2
-pr
 pr-10 proteins
 pr-1 protein family
 pr3
@@ -8964,7 +8872,6 @@ pr promoter
 p-rr cdna sequences
 prrp
 prx
-ps
 ps1
 ps1
 ps1 ctf
@@ -9075,8 +8982,6 @@ ptx-3
 p-type atpase gene
 ptyr
 ptyr317 shc phosphopeptide
-pu
-pu
 pu-1
 pu.1
 pu.1 interaction partner
@@ -9108,7 +9013,6 @@ pyrp genes
 pyrr
 pyrr attenuation proteins
 pyruvate kinase
-pz
 qa promoter
 qbp
 qde-2
@@ -9117,7 +9021,6 @@ qtbp42
 quinone reductase
 quta mutants
 quta protein
-r
 r122a
 r1 gene
 r2
@@ -9338,8 +9241,6 @@ rat uncoupling protein gene promoter
 rat yb1 gene
 rat yb2 gene
 rat zn-15
-rb
-rb
 rb1
 rb2
 rb6-8c5
@@ -9629,7 +9530,6 @@ r-huepo
 rhu epo
 rhu g-csf
 rhu gm-csf
-ri
 ri alpha
 ri alpha complementary rna
 ri alpha gene
@@ -9766,7 +9666,6 @@ rnr
 rnr3 genes
 rnt1p
 rnu2
-ro
 rock-i
 roc promoter
 rok alpha
@@ -9786,8 +9685,6 @@ rous sarcoma virus ltr
 rous sarcoma virus promoter
 rox-1
 rox1p
-rp
-rp
 rp1
 rp2 locus at xp11.3
 rp47phox
@@ -9865,7 +9762,6 @@ rsp5 ww2
 rsp5 ww domain
 rss1p
 rsvcam-1
-rt
 rte-1
 rter
 rtfc gamma r alpha cdna
@@ -9930,7 +9826,6 @@ s6k1
 s6k2
 s6 kinase
 s7
-sa
 sac1
 saccharomyces cerevisiae 14dm gene
 saccharomyces cerevisiae ade 1 locus
@@ -10188,7 +10083,6 @@ sevenless
 seven-transmembrane g-protein coupled chemoattractant receptor
 sex hormone binding globulin
 sex-hormone-binding globulin
-sf
 sf1
 sf-1
 sf-1 binding site
@@ -10211,7 +10105,6 @@ sgth alpha
 sgth alpha-g1
 sgth alpha subunit
 sgth alpha subunit promoter
-sh
 sh2
 sh2 binding motif
 sh2-binding phosphoprotein
@@ -10370,7 +10263,6 @@ sls1p mutant
 slt2
 slyd
 slys
-sm
 sm22alpha
 smad
 smad1 or 5
@@ -10426,7 +10318,6 @@ sms
 smsmad2
 smt3-protein
 smtck genomic upstream sequences
-sn
 snail family proteins
 sn antibody
 snap-23
@@ -10582,7 +10473,6 @@ sputum interleukin-8
 spv
 spv virulence genes
 squalene synthase genes
-sr
 sr33 protein
 sr45 protein
 sr alpha
@@ -10802,7 +10692,6 @@ striatum-enriched phosphatase
 stripe 2
 stromelysin-1
 sty1
-su
 subunit-a gene
 subunit vib
 suc1
@@ -10894,8 +10783,6 @@ synthetic gnrh
 synthetic max
 syrian hamster cad gene
 syrian hamster multifunctional protein cad
-t
-t'
 t'(135)
 t2 gene
 t2 protein
@@ -11099,7 +10986,6 @@ testis-specific c-mos mrna
 testis-specific mrna transcript
 tetr
 tev mutants
-tf
 tf1
 tf1 mrna
 tfa1
@@ -11122,8 +11008,6 @@ tfiiib-dna complex
 tfiiic alpha
 tfiik
 tfr
-tg
-tg
 tgek tetrapeptide
 tgfalpha
 tgf alpha
@@ -11143,7 +11027,6 @@ tgf-betaf
 tgf-beta-related factor
 tgf-beta rii
 tgm1 gene
-th
 thbs3 gene
 th domain
 thermus pyr promoter region
@@ -11226,8 +11109,6 @@ tissue-specific plastin isoforms
 tissue transglutaminase promoter
 tissue-type plasminogen activator
 titin
-tk
-tk
 tk1
 tk basal promoters
 tkc1
@@ -11238,7 +11119,6 @@ tk genes
 tk promoter
 tls
 t lymphocyte early-activation gene
-tm
 tmbr-1
 tm env protein
 tmf
@@ -11295,7 +11175,6 @@ tox operator
 toxr
 toxr protein
 toxt
-tp
 tp53 target gene
 tp53 transcripts
 tpa
@@ -11314,7 +11193,6 @@ t protein
 tps1
 tps2
 tps3
-tr
 tr2
 tr2 orphan receptor
 traa
@@ -11798,7 +11676,6 @@ uvrab complex
 uvra protein
 uvrb protein
 uvsh77 mutants
-v
 v12ha-ras
 v12n38 ras
 v1a
@@ -11887,7 +11764,6 @@ v-fos
 vfr promoters
 v-gcr gene
 v gene
-vh
 vh4
 vh4 heavy chains
 vh4-hv2a
@@ -11940,7 +11816,6 @@ vitamin d receptor
 v-jun
 vkappa genes
 vk light chain
-vl
 vl30 elements
 v lambda pseudogene
 vlc1
@@ -12003,7 +11878,6 @@ vwf
 vwf locus
 vwf multimers
 vzv gk
-w
 w3a1 etf subunits
 waf1
 waf1
@@ -12016,8 +11890,6 @@ wee1
 wee1
 wee1-binding protein(s)
 wfag
-wg
-wg
 wh22xegfp
 wheat eif-(iso)4f
 wheat histone h3 gene
@@ -12082,7 +11954,6 @@ wnt1
 wnt-1
 wnt-2b gene
 wnt-5a
-wp
 wp reporter
 wrn helicase
 wt1
@@ -12102,7 +11973,6 @@ xbr1b
 xbra2 promoter-driven reporter gene
 xbra gene
 xcoe2
-xd
 xd gene
 xdrp1 protein
 xenopus fibrinogen b beta subunit gene
@@ -12127,7 +11997,6 @@ xlim-1
 xmyoda tata motif
 xneurod
 x-ngnr-1
-xo
 xpa
 xpc
 xpf endonuclease superfamily
@@ -12149,7 +12018,6 @@ xylose isomerase-encoding gene
 xylp
 xylr gene product
 xynb
-y
 y15170
 y15171
 y15172
@@ -12240,7 +12108,6 @@ yy1
 yy1 binding sites
 yy1 class transcription factors
 yy1 consensus sequence
-z
 z2z6
 z2z6 core enhancers
 zap-70

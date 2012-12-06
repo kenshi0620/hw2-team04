@@ -187,6 +187,9 @@ public class Team04PassageCandidateFinder {
 				newResult.add(p);
 			}
 		}
+		if (newResult.size() == 0) {
+			return newResult;
+		}
 		
 		System.out.println(newResult.size() + " " + newResult.get(newResult.size() - 1).getProbability() +"$%$%$%$" + newResult.get(0).getProbability());
 		return newResult;

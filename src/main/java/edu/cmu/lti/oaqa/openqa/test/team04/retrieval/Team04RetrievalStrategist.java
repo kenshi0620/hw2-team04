@@ -1,7 +1,13 @@
 package edu.cmu.lti.oaqa.openqa.test.team04.retrieval;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
+import java.util.Set;
 
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.common.SolrDocument;
@@ -11,11 +17,13 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.tartarus.martin.Stemmer;
 
+import scala.actors.threadpool.Arrays;
+
 import edu.cmu.lti.oaqa.core.provider.solr.SolrWrapper;
 import edu.cmu.lti.oaqa.cse.basephase.retrieval.AbstractRetrievalStrategist;
 import edu.cmu.lti.oaqa.framework.data.Keyterm;
 import edu.cmu.lti.oaqa.framework.data.RetrievalResult;
-import edu.washington.cs.knowitall.morpha.MorphaStemmer;
+import edu.cmu.lti.oaqa.openqa.test.team04.passage.basic.KeytermListExtendor;
 
 public class Team04RetrievalStrategist extends AbstractRetrievalStrategist {
 
@@ -82,23 +90,85 @@ public class Team04RetrievalStrategist extends AbstractRetrievalStrategist {
 
   protected String formulateQuery(String questionText, List<Keyterm> keyterms) {
     StringBuffer result = new StringBuffer();
-    for (Keyterm keyterm : keyterms) {
-      System.out.println(" TRANSFORM: " + keyterm.getText() + " --> " + stem(keyterm.getText()));
-      // System.out.println(" TRANSFORM: " + keyterm.getText() + " --> "
-      // + MorphaStemmer.stemToken(keyterm.getText()));
-      result.append("\"" + stem(keyterm.getText()) + "*\" ");
+    List<Keyterm> shrunk = new ArrayList<Keyterm>();
+    for (Keyterm keyterm : keyterms){
+      shrunk.add(keyterm);
+    }
+    keyterms = new ArrayList<Keyterm>();
+    List<Keyterm> extended = new ArrayList<Keyterm>();
+    System.err.println("0: " + shrunk.toString());
+    // wikipedia redirect
+    try {
+      extended = KeytermListExtendor.wikipediaRedirect(shrunk);
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+      extended = new ArrayList<Keyterm>();
+    }
+    for (Keyterm keyterm : extended) {
+      keyterms.add(keyterm);
+    }
+    System.err.println("1: " + extended.toString());
+    // random website
+    try {
+      extended = KeytermListExtendor.KeytermListExtendor(shrunk);
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+      extended = new ArrayList<Keyterm>();
+    }
+    for (Keyterm keyterm : extended) {
+      keyterms.add(keyterm);
+    }
+    System.err.println("2: " + extended.toString());
+    // add back originals
+    for (Keyterm keyterm : shrunk) {
+      keyterms.add(keyterm);
+    }
+    Set<Keyterm> uniques = new HashSet<Keyterm>(Arrays.asList(keyterms.toArray()));
+    for (Keyterm keyterm : uniques) {
+      boolean hasNumber = hasNumber(keyterm.getText()) && keyterm.getText().length() > 1;
+      if (keyterm.getText().length() > 2 || hasNumber)
+      {
+        System.out.println(" TRANSFORM: " + keyterm.getText() + " --> " + stem(keyterm.getText()));
+        // System.out.println(" TRANSFORM: " + keyterm.getText() + " --> "
+        // + MorphaStemmer.stemToken(keyterm.getText()));
+        result.append("\"" + keyterm.getText() + "\" ");
+        //result.append("\"" + stem(keyterm.getText()) + "*\" ");
+      }
     }
     result.append(questionText);
     String query = result.toString();
     System.out.println(" QUERY: " + query);
     return query;
   }
+  
+  private boolean hasNumber(String s)
+  {
+    String[] n = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
+    Set<String> ns = new HashSet<String>(Arrays.asList(n));
+    for (char c : s.toCharArray())
+    {
+      if (ns.contains(String.valueOf(c)))
+      {
+        return true;
+      }
+    }
+    return false;
+  }
 
   private String stem(String s) {
-    Stemmer stemmer = new Stemmer();
-    stemmer.add(s.toCharArray(), s.length());
-    stemmer.stem();
-    return stemmer.toString();
+    if (s.length() > 0)
+    {
+      Stemmer stemmer = new Stemmer();
+      stemmer.add(s.toCharArray(), s.length());
+      stemmer.stem();
+      return stemmer.toString();
+    }
+    else
+    {
+      return s;
+    }
   }
 
 }
