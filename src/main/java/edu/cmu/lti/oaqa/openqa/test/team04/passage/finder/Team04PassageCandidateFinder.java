@@ -247,7 +247,7 @@ public class Team04PassageCandidateFinder {
           }
           */
           text = htmlText;
-          text = text.substring(0, Math.min(5500, text.length()));
+          text = text.substring(0, Math.min(6000, text.length()));
 	      } catch (SolrServerException e) {
 	        e.printStackTrace();
 	      }

@@ -14,8 +14,9 @@ pipeline:
   - inherit: jdbc.sqlite.cse.phase  
     name: keyterm-extractor
     options: |
-      - inherit: hellobioqa.team04.keyterm.AustinMaKeytermExtractor
+      #- inherit: hellobioqa.team04.keyterm.AustinMaKeytermExtractor
       - inherit: hellobioqa.team04.keyterm.simple
+      
 
   - inherit: jdbc.sqlite.cse.phase 
     name: retrieval-strategist
@@ -25,7 +26,8 @@ pipeline:
   - inherit: jdbc.sqlite.cse.phase  
     name: passage-extractor
     options: |
-      - inherit: hellobioqa.team04.passage.Team04PassageExtrator
+      #- inherit: hellobioqa.team04.passage.Team04PassageExtrator
+      - inherit: hellobioqa.team04.passage.SentencedPassageExtractor
       
   - inherit: helloqa.eval.keyterm-aggregator-consumer
 

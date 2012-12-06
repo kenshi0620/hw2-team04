@@ -215,11 +215,11 @@ public class ExtendedSimplePassageCandidateFinder {
           // for now, making sure the text isn't too long
           
           // try to clean the text by starting from the first passage in the document
-          Pattern p = Pattern.compile( "<P>" );
+          /*Pattern p = Pattern.compile( "<P>" );
           Matcher m = p.matcher( text );
           if ( m.find() ) {
             text = text.substring(m.start());
-          }
+          }*/
           
           
           text = htmlText;

@@ -35,9 +35,9 @@ public class Team04PassageExtrator extends SimplePassageExtractor {
       keyterms = myKLE.KeytermListExtendor(keyterms);
     } catch (IOException e1) {
       e1.printStackTrace();
-    }
+    }*/
     
-    System.out.println(keyterms.toString());*/
+    System.out.println(keyterms.toString());
     
 	  if (keyterms.size() == 0 || documents.size() == 0)
 		  return new ArrayList<PassageCandidate>();
