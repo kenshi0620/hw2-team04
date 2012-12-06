@@ -30,14 +30,14 @@ public class Team04PassageExtrator extends SimplePassageExtractor {
   protected List<PassageCandidate> extractPassages(String question, List<Keyterm> keyterms,
           List<RetrievalResult> documents) {
 
-    KeytermListExtendor myKLE = new  KeytermListExtendor(); 
+    /*KeytermListExtendor myKLE = new  KeytermListExtendor(); 
     try {
       keyterms = myKLE.KeytermListExtendor(keyterms);
     } catch (IOException e1) {
       e1.printStackTrace();
     }
     
-    System.out.println(keyterms.toString());
+    System.out.println(keyterms.toString());*/
     
 	  if (keyterms.size() == 0 || documents.size() == 0)
 		  return new ArrayList<PassageCandidate>();
