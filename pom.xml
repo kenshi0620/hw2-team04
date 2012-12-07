@@ -96,6 +96,13 @@
 			<artifactId>porter-stemmer</artifactId>
 			<version>1.4</version>
 		</dependency>
+		<dependency>
+			<groupId>
+				edu.washington.cs.knowitall.stanford-corenlp
+			</groupId>
+			<artifactId>stanford-postag-models</artifactId>
+			<version>1.3.2</version>
+		</dependency>
 	</dependencies>
 	<scm>
 		<connection>scm:git:git@github.com:laundry/hw2-team04.git</connection>
