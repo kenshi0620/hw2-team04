@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -47,8 +49,8 @@ public class AustinMaKeytermExtractor extends AbstractKeytermExtractor {
   public void initialize(UimaContext c) throws ResourceInitializationException {
     super.initialize(c);
 
-    nerModelFile = new File("src/main/resources/ne-en-bio-genetag.HmmChunker");
     try {
+      nerModelFile = new File(new URI(AustinMaKeytermExtractor.class.getResource("/ne-en-bio-genetag.HmmChunker").toString()));
       chunker = (Chunker) AbstractExternalizable.readObject(nerModelFile);
     } catch (IOException e) {
       System.err.println("IOException in creating chunker");
@@ -58,12 +60,16 @@ public class AustinMaKeytermExtractor extends AbstractKeytermExtractor {
       System.err.println("ClassNotFoundException in creating chunker");
       throw new ResourceInitializationException("Unable to load NER model file",
               "load_ner_model_error", new Object[] { nerModelFile }, e);
+    } catch (URISyntaxException e) {
+      e.printStackTrace();
+      throw new ResourceInitializationException("Unable to load NER model file",
+              "load_ner_model_error", new Object[] { nerModelFile }, e);
     }
 
     // Read in the geneDictionary
     geneDictionary = new HashSet<String>();
     try {
-      File geneDictionaryFile = new File("src/main/resources/ref.dic");
+      File geneDictionaryFile = new File(new URI(AustinMaKeytermExtractor.class.getResource("/ref.dic").toString()));
       BufferedReader reader = new BufferedReader(new FileReader(geneDictionaryFile));
       String line;
       try {
@@ -78,6 +84,11 @@ public class AustinMaKeytermExtractor extends AbstractKeytermExtractor {
       System.err.println("FileNotFoundException in reading gene dictionary file");
       throw new ResourceInitializationException("Unable to find gene dictionary file",
               "load_gene_dic_error", new Object[] {}, e);
+    } catch (URISyntaxException e1) {
+      // TODO Auto-generated catch block
+      e1.printStackTrace();
+      throw new ResourceInitializationException("Unable to find gene dictionary file",
+              "load_gene_dic_error", new Object[] {}, e1);
     }
   }
 

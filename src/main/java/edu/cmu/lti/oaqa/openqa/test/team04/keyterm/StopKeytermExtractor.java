@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -43,7 +45,8 @@ public class StopKeytermExtractor extends AbstractKeytermExtractor {
   public void initialize(UimaContext c) throws ResourceInitializationException {
     stopList = new HashSet<String>();
     try {
-      File stopFile = new File("src/main/resources/stoplist.txt");
+      URI uri = new URI(StopKeytermExtractor.class.getResource("/stoplist.txt").toString());
+      File stopFile = new File(uri);
       BufferedReader reader = new BufferedReader(new FileReader(stopFile));
       String line;
       try {
@@ -59,6 +62,10 @@ public class StopKeytermExtractor extends AbstractKeytermExtractor {
       System.err.println("FileNotFoundException in reading stoplist");
       throw new ResourceInitializationException("Unable to find stoplist", "load_stoplist_error",
               new Object[] {}, e);
+    } catch (URISyntaxException e1) {
+      e1.printStackTrace();
+      throw new ResourceInitializationException("Unable to find stoplist", "load_stoplist_error",
+              new Object[] {}, e1);
     }
     super.initialize(c);
   }
