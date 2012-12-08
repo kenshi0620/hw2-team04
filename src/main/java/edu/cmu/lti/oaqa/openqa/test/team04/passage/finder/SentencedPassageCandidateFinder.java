@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.SortedSet;
+import java.util.Stack;
+import java.util.StringTokenizer;
 import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -43,10 +45,13 @@ public class SentencedPassageCandidateFinder {
   private List<RetrievalResult> documents;
   private List<String> keytermList;
   private List<String> docTexts;
+  private List<String> htmlTexts;
   
   private SolrWrapper wrapper;
   private int numWords;
   private int numDocs;
+  private int htmlStart = 0;
+  private int htmlEnd = 0;
 
 
   public SentencedPassageCandidateFinder(List<Keyterm> keyterms, List<RetrievalResult> documents, SolrWrapper wrapper) throws Exception {
@@ -62,6 +67,7 @@ public class SentencedPassageCandidateFinder {
     
     double[][] data = new double[numWords][numDocs];
     docTexts = new ArrayList<String>();
+    htmlTexts = new ArrayList<String>();
     this.documents = documents;
     
     p2dMap = new ArrayList<List<PassageSpan>>();
@@ -69,7 +75,9 @@ public class SentencedPassageCandidateFinder {
     int docCnt = 0;
     for (RetrievalResult document : documents) {
       String key = document.getDocID();
-      String text = getText(key);
+      String htmlText = getHTMLText(key);
+      htmlTexts.add(htmlText);
+      String text = getText(htmlText);
       docTexts.add(text);
       
       // chunck doc into sentence
@@ -87,8 +95,8 @@ public class SentencedPassageCandidateFinder {
           int start = sentence.start();
           int end = sentence.end();
           
-          System.out.println( "start:" + start  + "  end:" + end 
-                  + "sentence:" + text.substring(start, end));
+//          System.out.println( "start:" + start  + "  end:" + end 
+//                  + "sentence:" + text.substring(start, end));
           
           spanList.add(new PassageSpan(start , end));
         }
@@ -143,7 +151,7 @@ public class SentencedPassageCandidateFinder {
           int keytermsFound = 0;
           
           String passageText = text.substring(passage.begin, passage.end);
-          String cleanPassageText = Jsoup.parse(passageText).text().replaceAll("([\177-\377\0-\32]*)", "");
+          String cleanPassageText = passageText;
           
           int keyId = 0;
           for (String keyterm: keytermList) {
@@ -175,29 +183,36 @@ public class SentencedPassageCandidateFinder {
           
           PassageCandidate window = null;
           try {
-            window = new PassageCandidate( documents.get(i).getDocID() , passage.begin , passage.end , (float) score , null );
+        	  /////////////////////////
+        	  getHtmlPos(i, passageText);
+        	  if (htmlEnd > 0) {
+        		  window = new PassageCandidate( documents.get(i).getDocID() , htmlStart , htmlEnd , (float) score , null );
+//        		  if (window.getProbability() >=1) result.add( window );
+        		  result.add( window );
+        	  }
           } catch (AnalysisEngineProcessException e) {
             e.printStackTrace();
           }
-          if (window.getProbability() >=0.2) result.add( window );
+          
          }
         }
-    Collections.sort(result, new PassageCandidateComparator());
-    List<PassageCandidate> newResult = new ArrayList<PassageCandidate>();
-    
-    double max = result.get(0).getProbability();
-    double min = result.get(result.size() - 1).getProbability();
-    for (PassageCandidate p: result) {
-      if (p.getProbability() > 0.5 * min + 0.5 * max) {
-        newResult.add(p);
-      }
-    }
-    if (newResult.size() == 0) {
-      return newResult;
-    }
-    
-    System.out.println(newResult.size() + " " + newResult.get(newResult.size() - 1).getProbability() +"$%$%$%$" + newResult.get(0).getProbability());
-    return newResult;
+    return result;
+//    Collections.sort(result, new PassageCandidateComparator());
+//    List<PassageCandidate> newResult = new ArrayList<PassageCandidate>();
+//    
+//    double max = result.get(0).getProbability();
+//    double min = result.get(result.size() - 1).getProbability();
+//    for (PassageCandidate p: result) {
+//      if (p.getProbability() > 0.5 * min + 0.5 * max) {
+//        newResult.add(p);
+//      }
+//    }
+//    if (newResult.size() == 0) {
+//      return newResult;
+//    }
+//    
+//    System.out.println(newResult.size() + " " + newResult.get(newResult.size() - 1).getProbability() +"$%$%$%$" + newResult.get(0).getProbability());
+//    return newResult;
   }
   
   
@@ -228,7 +243,7 @@ public class SentencedPassageCandidateFinder {
     }
   }
   
-  private String getText(String id) throws Exception {
+  private String getHTMLText(String id) throws Exception {
     String text = "";
     try {
           String htmlText = wrapper.getDocText(id);
@@ -238,4 +253,125 @@ public class SentencedPassageCandidateFinder {
         }
     return text;
   }
+    
+    private String getText(String htmlText) throws Exception {
+    	
+    return Jsoup.parse(htmlText).text();
+  }
+    
+    private void getHtmlPos(int docid, String passage) {
+    	
+    	StringTokenizer tokenizer = new StringTokenizer(passage);
+    	Stack<Integer> maxStack0 = new Stack<Integer>();
+		Stack<Integer> maxStack1 = new Stack<Integer>();
+		Stack<Matcher> matchStack0 = new Stack<Matcher>();
+		Stack<Matcher> matchStack1 = new Stack<Matcher>();
+		String html = htmlTexts.get(docid);
+		Pattern p = null;
+		int currMax = 0;
+		int start = -1;
+		boolean hasStart = false;
+		
+		while (tokenizer.hasMoreTokens()) {
+			
+			Matcher m = null;
+			if (matchStack1.isEmpty()) {
+				String key = tokenizer.nextToken();
+//				if (!keytermList.contains(key))
+//					continue;
+				if (key.contains("(") || key.contains(")"))
+					continue;
+				if (key.contains("[") || key.contains("]"))
+					continue;
+				if (key.contains("{") || key.contains("}"))
+					continue;
+				if (key.contains("+") || key.contains("*") || key.contains("?"))
+					continue;
+				m = Pattern.compile(key).matcher(html);
+			} else {
+				m = matchStack1.pop();
+			}
+			
+			if (m.find(currMax)) {
+				if (hasStart == false) {
+					hasStart = true;
+					start = m.start();
+				} else {
+					// shrink
+					Stack<Matcher> tmpMatcherStack = new Stack<Matcher>();
+					Stack<Integer> tmpMaxStack = new Stack<Integer>();
+					Matcher tmpMatcher;
+					Integer tmpMax;
+					while (!matchStack0.isEmpty()) {
+						tmpMatcher = matchStack0.pop();
+						tmpMax = maxStack0.pop();
+						boolean startchange = false;
+						if (matchStack0.isEmpty()) {
+							startchange = true;
+						}
+						while (tmpMatcher.find(tmpMax)) {
+							if (tmpMatcher.end() < m.start()) {
+								if (tmpMax == tmpMatcher.end())
+									break;
+								tmpMax = tmpMatcher.end();
+								if (startchange == true) {
+									start = tmpMatcher.start();
+								}
+							} else {
+								break;
+							}
+						}
+						tmpMaxStack.push(tmpMax);
+						tmpMatcherStack.push(tmpMatcher);
+					}
+					while (!tmpMatcherStack.isEmpty()) {
+						tmpMatcher = tmpMatcherStack.pop();
+						tmpMax = tmpMaxStack.pop();
+						matchStack0.push(tmpMatcher);
+						maxStack0.push(tmpMax);
+					}
+				}
+				currMax = m.end();
+				maxStack0.push(currMax);
+				matchStack0.push(m);
+				continue;
+			} else {
+				continue;
+				//break;
+//				System.out.println("#" +key);
+//				stack1.push(key);
+//				matchStack1.push(m);
+//				m = matchStack0.pop();
+//				key = stack0.pop();
+//				if (m != null) {
+//					currMax = m.end();
+//					stack1.push(key);
+//					matchStack1.push(m);
+//					if (matchStack0.isEmpty()) {
+//						hasStart = false;
+//						start = -1;
+//					}
+//				}
+			}
+			
+		}
+		
+		int end = -1;
+		if (!tokenizer.hasMoreTokens() && !matchStack0.isEmpty()) {
+			
+			end = matchStack0.peek().end();
+			htmlStart = start;
+			htmlEnd = end;
+			System.out.println("HTML@@" + html.substring(htmlStart, htmlEnd));
+			System.out.println("plain@@" + passage);
+		} else {
+//			System.out.println("HTML@@Not Found" + start + "@@" + end + "@@" + tokenizer.countTokens() + "@@" + matchStack0.size());
+//			System.out.println("plain@@" + passage);
+		}
+		
+//		System.out.println("" + start + " " + end);
+//		if (start >= 0)
+//			System.out.println(html.substring(start, end));
+    	
+    }
 }
