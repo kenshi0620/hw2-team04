@@ -43,12 +43,9 @@ public class KeytermListExtendor {
       }
       String[] lines = htmlFile.toString().split("!!!");
       for (String pair : lines) {
-        System.out.println("##" + pair);
         try {
-          System.out.println("!!" + pair.substring(pair.indexOf(";") + 1));
           extendedKeyterms.add(new Keyterm(pair.substring(pair.indexOf(";") + 1)));
         } catch (Exception e) {
-          System.out.println("??");
           e.printStackTrace();
         }
       }
