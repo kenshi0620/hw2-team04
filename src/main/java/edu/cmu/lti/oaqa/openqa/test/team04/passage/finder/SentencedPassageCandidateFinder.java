@@ -362,8 +362,8 @@ public class SentencedPassageCandidateFinder {
 			end = matchStack0.peek().end();
 			htmlStart = start;
 			htmlEnd = end;
-			System.out.println("HTML@@" + html.substring(htmlStart, htmlEnd));
-			System.out.println("plain@@" + passage);
+			//System.out.println("HTML@@" + html.substring(htmlStart, htmlEnd));
+			//System.out.println("plain@@" + passage);
 		} else {
 //			System.out.println("HTML@@Not Found" + start + "@@" + end + "@@" + tokenizer.countTokens() + "@@" + matchStack0.size());
 //			System.out.println("plain@@" + passage);

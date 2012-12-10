@@ -45,6 +45,8 @@ public class Team04RetrievalStrategist extends AbstractRetrievalStrategist {
 
   protected Integer hitListFinal;
 
+  protected boolean asterisk;
+
   protected SolrWrapper wrapper;
 
   protected PosTagNamedEntityRecognizer ner;
@@ -55,6 +57,7 @@ public class Team04RetrievalStrategist extends AbstractRetrievalStrategist {
     try {
       this.hitListSize = (Integer) aContext.getConfigParameterValue("hit-list-size");
       this.hitListFinal = (Integer) aContext.getConfigParameterValue("hit-list-final");
+      this.asterisk = (Boolean) aContext.getConfigParameterValue("asterisk");
     } catch (ClassCastException e) { // all cross-opts are strings?
       this.hitListSize = Integer.parseInt((String) aContext
               .getConfigParameterValue("hit-list-size"));
@@ -270,7 +273,11 @@ public class Team04RetrievalStrategist extends AbstractRetrievalStrategist {
           // System.out.println(" TRANSFORM: " + keyterm.getText() + " --> "
           // + MorphaStemmer.stemToken(keyterm.getText()));
         } else {
-          result.append("\"" + keyterm.getText() + "\" ");
+          if (asterisk) {
+            result.append("\"" + keyterm.getText() + "*\" ");
+          } else {
+            result.append("\"" + keyterm.getText() + "\" ");
+          }
         }
       }
     }
