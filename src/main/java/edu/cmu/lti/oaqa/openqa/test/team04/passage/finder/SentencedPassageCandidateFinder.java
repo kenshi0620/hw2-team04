@@ -35,7 +35,10 @@ import edu.cmu.lti.oaqa.framework.data.PassageCandidate;
 import edu.cmu.lti.oaqa.framework.data.RetrievalResult;
 import edu.cmu.lti.oaqa.openqa.test.team04.passage.basic.IdfIndexer;
 import edu.cmu.lti.oaqa.openqa.test.team04.passage.finder.Team04PassageCandidateFinder.PassageCandidateComparator;
-
+/**
+ * Returns Passage Candidates with offset, probability and text. 
+ *
+ */
 public class SentencedPassageCandidateFinder {
   
   private RealMatrix p2dMatrix;
@@ -53,8 +56,13 @@ public class SentencedPassageCandidateFinder {
   private int htmlStart = 0;
   private int htmlEnd = 0;
 
-
-  public SentencedPassageCandidateFinder(List<Keyterm> keyterms, List<RetrievalResult> documents, SolrWrapper wrapper) throws Exception {
+  /**
+   * Finder constructor.
+   * In this constructor, it did the following things:
+   * 1. iterate all document candidate and calculate the idf values
+   * 2. chunk all documents into sentences and treat each sentence as passage candidate 
+   */
+    public SentencedPassageCandidateFinder(List<Keyterm> keyterms, List<RetrievalResult> documents, SolrWrapper wrapper) throws Exception {
     this.wrapper = wrapper;
     
     keytermList = new ArrayList<String>();
@@ -118,7 +126,16 @@ public class SentencedPassageCandidateFinder {
     this.p2dMatrix = IdfIndexer.transform(dataCnt);
   }
   
-  
+  /**
+   * This function returns a list of passage candidates.
+   * This function did the following things:
+   * 1. for each document, calculate total keyterm and total matches
+   * 2. for each passage candidate, calculate keyterm found and keyterm matches
+   * 3. calculate score for each passage candidate
+   * 4. filter the candidate with no keyterms in it
+   * 5. find the candidate "true" offset in html files using the current text. 
+   * 6. add passage candidate into results list
+   */
   public List<PassageCandidate> extractPassages() {
     List<PassageCandidate> result = new ArrayList<PassageCandidate>();
 
@@ -215,13 +232,21 @@ public class SentencedPassageCandidateFinder {
 //    return newResult;
   }
   
-  
+  /**
+   * This class is passage candidates that contains passage text,
+   * start and end position of the passage
+   */
   class PassageSpan {
     public int begin, end;
     public PassageSpan( int begin , int end ) {
       this.begin = begin;
       this.end = end;
     }
+    /**
+     * Returns a boolean variable 
+     * that indicates whether a passages is contains in given range. 
+     *
+     */
     public boolean containedIn ( int begin , int end ) {
       if ( begin <= this.begin && end >= this.end ) {
         return true;
@@ -230,9 +255,21 @@ public class SentencedPassageCandidateFinder {
       }
     }
   }
-  class PassageCandidateComparator implements Comparator<PassageCandidate> {
 
+  /**
+   * This class provide 3 functions
+   * 1. campare the probability of 2 passaes
+   * 2. get HTMLText for a passage candidate.
+   * 3. Calculate the "true" positions of passage candidate in html text.
+   *    Originally in plain text.
+   *    
+   */
+  class PassageCandidateComparator implements Comparator<PassageCandidate> {
     @Override
+    /**
+     * campare the probability of 2 passaes
+     *    
+     */
     public int compare(PassageCandidate o1, PassageCandidate o2) {
       // TODO Auto-generated method stub
       if (o1.getProbability() > o2.getProbability())
@@ -243,6 +280,10 @@ public class SentencedPassageCandidateFinder {
     }
   }
   
+  /**
+   * get HTMLText for a passage candidate.
+   *    
+   */
   private String getHTMLText(String id) throws Exception {
     String text = "";
     try {
@@ -258,7 +299,10 @@ public class SentencedPassageCandidateFinder {
     	
     return Jsoup.parse(htmlText).text();
   }
-    
+    /**
+     *  Calculate the "true" positions of passage candidate in html text.
+     *    Originally in plain text.
+     */
     private void getHtmlPos(int docid, String passage) {
     	
     	StringTokenizer tokenizer = new StringTokenizer(passage);
