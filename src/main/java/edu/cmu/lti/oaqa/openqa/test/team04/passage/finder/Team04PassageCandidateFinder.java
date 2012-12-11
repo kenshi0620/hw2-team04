@@ -26,7 +26,10 @@ import edu.cmu.lti.oaqa.framework.data.RetrievalResult;
 import edu.cmu.lti.oaqa.openqa.hello.passage.KeytermWindowScorer;
 import edu.cmu.lti.oaqa.openqa.hello.passage.PassageCandidateFinder;
 import edu.cmu.lti.oaqa.openqa.test.team04.passage.basic.IdfIndexer;
-
+/**
+ * Returns Passage Candidates with offset, probability and text. 
+ *
+ */
 public class Team04PassageCandidateFinder {
 	
 //	private String text;
@@ -47,7 +50,13 @@ public class Team04PassageCandidateFinder {
 	private int numWords;
 	private int numDocs;
 	
-	
+	/**
+   * Finder constructor.
+   * In this constructor, it did the following things:
+   * 1. iterate all document candidate and calculate the idf values
+   * 2. find all keyterms in the document and chuck the document into passages
+   * by any combination of 2 keyterms 
+   */
 	public Team04PassageCandidateFinder(List<Keyterm> keyterms, List<RetrievalResult> documents, SolrWrapper wrapper) throws Exception {
 		this.wrapper = wrapper;
 		
@@ -101,6 +110,14 @@ public class Team04PassageCandidateFinder {
 		this.p2dMatrix = IdfIndexer.transform(new RealMatrixImpl(data));
 	}
 	
+	/**
+   * This function returns a list of passage candidates.
+   * This function did the following things:
+   * 1. for each document, calculate total keyterm and total matches
+   * 2. for each passage candidate, calculate keyterm found and keyterm matches
+   * 3. calculate score for each passage candidate
+   * 4. add passage candidate into results list
+   */
 	public List<PassageCandidate> extractPassages() {
 		List<PassageCandidate> result = new ArrayList<PassageCandidate>();
 		
@@ -200,13 +217,22 @@ public class Team04PassageCandidateFinder {
 //		}
 //		return top10;
 	}
-	
+	 
+  /**
+   * This class is passage candidates that contains passage text,
+   * start and end position of the passage
+   */	
 	class PassageSpan {
 		private int begin, end;
 		public PassageSpan( int begin , int end ) {
 			this.begin = begin;
 			this.end = end;
 		}
+	  /**
+     * Returns a boolean variable 
+     * that indicates whether a passages is contains in given range. 
+     *
+     */
 		public boolean containedIn ( int begin , int end ) {
 			if ( begin <= this.begin && end >= this.end ) {
 				return true;
@@ -215,7 +241,10 @@ public class Team04PassageCandidateFinder {
 			}
 		}
 	}
-	
+  /**
+   * This class provide a function to campare the probability of 2 passaes
+   * 
+   */
 	class PassageCandidateComparator implements Comparator<PassageCandidate> {
 
 		@Override

@@ -24,6 +24,12 @@ import edu.cmu.lti.oaqa.openqa.test.team04.passage.basic.KeytermListExtendor;
 import edu.cmu.lti.oaqa.openqa.test.team04.passage.basic.VectorGenerator;
 import edu.cmu.lti.oaqa.openqa.test.team04.passage.finder.Team04PassageCandidateFinder;
 
+
+/**
+ * Returns an Passage Candidates with their offset and passage text
+ * Call Team04PassageCandidateFinder to find passage candidates.
+ * 
+ */
 public class Team04PassageExtrator extends SimplePassageExtractor {
 
   @Override

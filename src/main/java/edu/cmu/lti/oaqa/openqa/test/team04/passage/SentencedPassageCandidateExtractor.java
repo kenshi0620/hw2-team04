@@ -12,6 +12,11 @@ import edu.cmu.lti.oaqa.openqa.test.team04.passage.basic.KeytermListExtendor;
 import edu.cmu.lti.oaqa.openqa.test.team04.passage.finder.ExtendedSimplePassageCandidateFinder;
 import edu.cmu.lti.oaqa.openqa.test.team04.passage.finder.SentencedPassageCandidateFinder;
 
+/**
+ * Returns an Passage Candidates with their offset and passage text
+ * Call SentencedPassageCandidateFinder to find passage candidates.
+ * 
+ */
 public class SentencedPassageCandidateExtractor extends SimplePassageExtractor {
 
   @Override
